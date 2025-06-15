@@ -27,7 +27,7 @@ export const NAVIGATION_ITEMS = [
   {
     name: 'Drivers & Vehicles',
     icon: 'people',
-    route: 'drivers-vehicles',
+    route: 'drivers-and-vehicles',
   },
   {
     name: 'Vehicle Actions',

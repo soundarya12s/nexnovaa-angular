@@ -1,13 +1,15 @@
-<nav class="p-3">
+<nav>
   <ul class="nav flex-column position-relative">
     @for(nav of navigationList;track $index){
-    <li class="nav-item cursor mt-3">
-      <a
-        href="{{ nav.route }}"
-        class="text-decoration-none font-weight-600 bi bi-{{ nav.icon }}"
-      >
-        {{ nav.name }}</a
-      >
+    <li
+      class="nav-item cursor mt-3 px-3 py-2"
+      [routerLink]="nav.route"
+      routerLinkActive="active-nav text-primary-emphasis"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <p class="text-decoration-none font-weight-600 m-0 bi bi-{{ nav.icon }}">
+        {{ nav.name }}
+      </p>
     </li>
     }
   </ul>
