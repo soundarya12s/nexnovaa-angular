@@ -41,7 +41,7 @@ body {
     --nav-bg-color: #124559;
 }
 
-@for $i from 8 through 24 {
+@for $i from 8 through 100 {
     .font-#{$i} {
         @include font-size(#{$i}px);
     }
@@ -189,8 +189,14 @@ li,
     border-radius: 1rem;
 }
 
-.font-weight-600 {
-    font-weight: 600;
+@mixin font-weight($weight) {
+    .font-weight-#{$weight} {
+        font-weight: $weight;
+    }
+}
+
+@for $i from 400 through 1000 {
+    @include font-weight($i);
 }
 
 .text-white {
