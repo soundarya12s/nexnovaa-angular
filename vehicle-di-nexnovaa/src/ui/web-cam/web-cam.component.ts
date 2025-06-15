@@ -18,15 +18,12 @@ export class WebCamComponent {
   private trigger = new Subject<void>();
   public webcamImage: WebcamImage | null = null;
   public trigger$ = this.trigger.asObservable();
-
   takeSnapshot() {
     this.trigger.next(); // Tells the <webcam> to take a picture
   }
-
   handleImage(image: WebcamImage) {
     this.webcamImage = image;
   }
-
   submit() {
     if (!this.webcamImage) return;
 
