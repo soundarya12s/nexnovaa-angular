@@ -8,6 +8,7 @@ import { ShipmentsComponent } from '../feature/shipments/shipments.component';
 import { OrdersComponent } from '../feature/orders/orders.component';
 import { DriversVehiclesComponent } from '../feature/drivers-vehicles/drivers-vehicles.component';
 import { VehicleActionsComponent } from '../feature/vehicle-actions/vehicle-actions.component';
+import { MapViewComponent } from '../ui/map-view/map-view.component';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,10 @@ export const routes: Routes = [
   {
     path: 'dock-allocation',
     component: DockAllocationComponent,
+  },
+  {
+    path: 'maps',
+    component: MapViewComponent,
   },
   {
     path: 'tracking',
