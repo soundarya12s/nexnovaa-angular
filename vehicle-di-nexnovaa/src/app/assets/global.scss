@@ -2,211 +2,217 @@
 // @import "@ng-select/ng-select/themes/default.theme.css";
 
 * {
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-    list-style: none;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
 }
 
 html,
 body {
-    width: 100%;
-    height: 100%;
-    overflow: auto;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }
 
 ::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-    margin: 0;
+  margin: 0;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #B9B9B9;
-    border-radius: 2rem;
-    margin: 0;
+  background-color: #b9b9b9;
+  border-radius: 2rem;
+  margin: 0;
 }
 
 :root {
-    --bs-white: #fff;
-    --bs-rich-black: #212121;
-    --bs-beige: #F4F6F8;
-    --bs-amber: #F57C00;
-    --b-air-force-blue: #598392;
-    --bs-light-grey: #cdcdcd;
-    --bs-red-color: #C50F1F;
-    --nav-bg-color: #124559;
+  --bs-white: #fff;
+  --bs-rich-black: #212121;
+  --bs-beige: #f4f6f8;
+  --bs-amber: #f57c00;
+  --b-air-force-blue: #598392;
+  --bs-light-blue: #cce4ecbb;
+  --bs-light-grey: #cdcdcd;
+  --bs-red-color: #c50f1f;
+  --nav-bg-color: #124559;
 }
 
 @for $i from 8 through 100 {
-    .font-#{$i} {
-        @include font-size(#{$i}px);
-    }
+  .font-#{$i} {
+    @include font-size(#{$i}px);
+  }
 }
 
 @for $i from 5 through 100 {
-    .h-#{$i}vh {
-        height: #{$i}vh;
-    }
+  .h-#{$i}vh {
+    height: #{$i}vh;
+  }
 }
 
 // util.scss or your global styles
 @for $i from 5 through 100 {
-    .h-#{$i} {
-        height: #{$i + "%"};
-    }
+  .h-#{$i} {
+    height: #{$i + "%"};
+  }
 }
 
-
 .fluent-tabs {
-    font-family: "Segoe UI", sans-serif;
-    display: block;
-    max-width: 100%;
+  font-family: "Segoe UI", sans-serif;
+  display: block;
+  max-width: 100%;
 }
 
 .fluent-tabs-nav {
-    display: flex;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    // border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-    gap: 1rem;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  // border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  gap: 1rem;
 
-    .fluent-tab {
-        cursor: pointer;
-        padding: 0.5rem 1rem;
-        border: none;
-        background: none;
-        font-size: 1rem;
-        color: var(--bs-link-color);
-        transition: background-color 0.3s, color 0.3s;
+  .fluent-tab {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: none;
+    font-size: 1rem;
+    color: var(--bs-link-color);
+    transition: background-color 0.3s, color 0.3s;
 
-        &.active {
-            color: var(--bs-primary);
-            font-weight: 600;
-            border-bottom: 3px solid var(--bs-primary);
-            border-radius: 4px 4px 0 0;
-        }
-
-        &.active-black {
-            color: var(--bs-black);
-            font-weight: 600;
-            border-bottom: 3px solid var(--bs-primary);
-            border-radius: 4px 4px 0 0;
-        }
+    &.active {
+      color: var(--bs-primary);
+      font-weight: 600;
+      border-bottom: 3px solid var(--bs-primary);
+      border-radius: 4px 4px 0 0;
     }
+
+    &.active-black {
+      color: var(--bs-black);
+      font-weight: 600;
+      border-bottom: 3px solid var(--bs-primary);
+      border-radius: 4px 4px 0 0;
+    }
+  }
 }
 
 .fluent-tabs-content {
-    .fluent-tab-pane {
-        display: none;
-        padding: 0 1rem 1rem 1rem;
-        border-radius: 0 0 4px 4px;
-    }
+  .fluent-tab-pane {
+    display: none;
+    padding: 0 1rem 1rem 1rem;
+    border-radius: 0 0 4px 4px;
+  }
 
-    .fluent-tab-pane.active {
-        display: block;
-    }
+  .fluent-tab-pane.active {
+    display: block;
+  }
 }
 
 .xy-box-shadow {
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1411764706), 0 0 2px rgba(0, 0, 0, 0.1215686275);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1411764706),
+    0 0 2px rgba(0, 0, 0, 0.1215686275);
 }
 
 .cursor {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .overflow-y-scroll {
-    overflow-y: auto;
+  overflow-y: auto;
 }
 
 .unstyled-select {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .unstyled-select:focus {
-    outline: none;
-    box-shadow: none;
+  outline: none;
+  box-shadow: none;
 }
 
 a,
 li,
 .text-decoration-none {
-    all: unset;
-    text-decoration: none;
-    color: inherit;
+  all: unset;
+  text-decoration: none;
+  color: inherit;
 }
 
 .d-flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .error-message {
-    color: var(--bs-red-color);
+  color: var(--bs-red-color);
 }
 
 .white-bg {
-    background-color: var(--bs-white);
+  background-color: var(--bs-white);
 }
 
 .beige-bg {
-    background-color: var(--bs-beige);
+  background-color: var(--bs-beige);
 }
 
 .amber-bg {
-    background-color: var(--bs-amber);
+  background-color: var(--bs-amber);
 }
 
 .grey-bg {
-    background-color: var(--bs-light-grey);
+  background-color: var(--bs-light-grey);
 }
 
 .air-force-blue-bg {
-    background-color: var(--b-air-force-blue);
+  background-color: var(--b-air-force-blue);
 }
 
 .nav-bg {
-    background-color: var(--nav-bg-color);
+  background-color: var(--nav-bg-color);
 }
 
 .position-bottom {
-    bottom: 1%;
+  bottom: 1%;
 }
 
 .position-center {
-    bottom: 30%;
+  bottom: 30%;
 }
 
 .border-radius-1 {
-    border-radius: 1rem;
+  border-radius: 1rem;
 }
 
 @mixin font-weight($weight) {
-    .font-weight-#{$weight} {
-        font-weight: $weight;
-    }
+  .font-weight-#{$weight} {
+    font-weight: $weight;
+  }
 }
 
 @for $i from 400 through 1000 {
-    @include font-weight($i);
+  @include font-weight($i);
 }
 
 .text-white {
-    color: var(--bs-beige);
+  color: var(--bs-beige);
 }
 
 .tex-black {
-    color: var(--bs-rich-black);
+  color: var(--bs-rich-black);
 }
 
 .text-blue {
-    color: var(--b-air-force-blue);
+  color: var(--b-air-force-blue);
+}
+
+.active-nav {
+  background-color: var(--bs-light-blue);
+  border-radius: 3px;
 }

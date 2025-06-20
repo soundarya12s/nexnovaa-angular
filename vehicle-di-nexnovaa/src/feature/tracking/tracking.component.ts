@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-web-cam',
+  selector: 'app-tracking',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './web-cam.component.html',
-  styleUrl: './web-cam.component.scss',
+  templateUrl: './tracking.component.html',
+  styleUrl: './tracking.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WebCamComponent {}
+export class TrackingComponent {}

@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-map-view',
+  selector: 'app-dock-allocation',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './map-view.component.html',
-  styleUrl: './map-view.component.scss',
+  templateUrl: './dock-allocation.component.html',
+  styleUrl: './dock-allocation.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MapViewComponent {}
+export class DockAllocationComponent {}
