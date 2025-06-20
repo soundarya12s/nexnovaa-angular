@@ -9,6 +9,7 @@ import { OrdersComponent } from '../feature/orders/orders.component';
 import { DriversVehiclesComponent } from '../feature/drivers-vehicles/drivers-vehicles.component';
 import { VehicleActionsComponent } from '../feature/vehicle-actions/vehicle-actions.component';
 import { MapViewComponent } from '../ui/map-view/map-view.component';
+import { WebcamComponent } from 'ngx-webcam';
 
 export const routes: Routes = [
   {
@@ -19,6 +20,14 @@ export const routes: Routes = [
   {
     path: 'dock-allocation',
     component: DockAllocationComponent,
+  },
+  {
+    path: 'scan-qr',
+    component: ScanQrComponent,
+  },
+  {
+    path: 'web-cam',
+    component: WebcamComponent,
   },
   {
     path: 'maps',
