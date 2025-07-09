@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vehicle-actions',
@@ -9,4 +10,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './vehicle-actions.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VehicleActionsComponent {}
+export class VehicleActionsComponent {
+  private readonly router = inject(Router);
+
+  opencamera() {
+    console.log('Opening camera for vehicle documentation');
+    // Logic to open camera goes here
+    this.router.navigate(['/scan-qr']);
+  }
+}

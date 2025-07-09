@@ -1,1 +1,33 @@
-<p>tracking works!</p>
+<div class="shipment-container">
+    <h3 class="fw-semibold mb-1">Shipment Tracking</h3>
+    <p class="text-muted mb-4">Track and monitor shipments in real-time</p>
+    <div class="card border-0 shadow-sm rounded-3">
+        <div class="card-body px-0 py-0">
+            <table class="table table-borderless align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-4">SHIPMENT ID</th>
+                        <th>ROUTE</th>
+                        <th>STATUS</th>
+                        <th>ESTIMATED DELIVERY</th>
+                        <th>LAST LOCATION</th>
+                        <th class="text-end pe-4">ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let shipment of shipments">
+                        <td class="ps-4 fw-medium">{{ shipment.id }}</td>
+                        <td>{{ shipment.route }}</td>
+                        <td> <span class="badge rounded-pill status-badge {{ shipment.statusClass }}"> {{
+                                shipment.status }} </span> </td>
+                        <td>{{ shipment.delivery }}</td>
+                        <td><i class="bi bi-geo-alt me-1 text-muted"></i>{{ shipment.location }} </td>
+                        <td class="text-end pe-4"> <button class="btn btn-sm btn-light me-2" title="Track"> <i
+                                    class="bi bi-geo-alt-fill" (click)="openLocation(shipment.location)"></i> </button> <button class="btn btn-sm btn-light"
+                                title="Details"> <i class="bi bi-info-circle"></i> </button> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

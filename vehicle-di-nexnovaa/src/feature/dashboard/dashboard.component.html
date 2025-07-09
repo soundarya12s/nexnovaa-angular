@@ -1,0 +1,24 @@
+<div>
+    <h3>Dashboard</h3>
+    <p class="text-muted">Welcome to the Logistics Management System</p>
+
+    <div class="row mb-4">
+        <div class="col-md-3" *ngFor="let card of summaryCards">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5>{{card.title}}</h5>
+                    <h3>{{card.value}}</h3>
+                    <p [ngClass]="{'text-success': card.change >= 0, 'text-danger': card.change < 0}">
+                        {{card.change >= 0 ? '+' : ''}}{{card.change}}% from last month
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h5>Dock Allocation Calendar</h5>
+    <div class="border rounded p-3 bg-white">
+        <!-- <img src="/assets/calendar.png" alt="Calendar Placeholder" class="img-fluid mb-3"> -->
+        <p>[Calendar integration placeholder]</p>
+    </div>
+</div>

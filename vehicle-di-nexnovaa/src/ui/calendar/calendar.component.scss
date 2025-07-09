@@ -1,1 +1,50 @@
+.calendar-container {
+  background-color: #f8f9fb;
+  padding: 24px;
+  border-radius: 12px;
+}
 
+.calendar-day {
+  width: 14.28%;
+  color: #6c757d;
+  font-size: 0.85rem;
+}
+
+.calendar-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.calendar-cell {
+  width: 14.28%;
+  padding: 6px;
+}
+
+.cell-box {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 8px;
+  height: 80px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  font-size: 0.85rem;
+  position: relative;
+}
+
+.cell-box.faded {
+  opacity: 0.3;
+}
+
+.cell-date {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.event-tag {
+  background-color: #e0f0ff;
+  color: #0d6efd;
+  font-size: 0.7rem;
+  border-radius: 4px;
+  padding: 2px 6px;
+  display: inline-block;
+  margin-top: 2px;
+}
