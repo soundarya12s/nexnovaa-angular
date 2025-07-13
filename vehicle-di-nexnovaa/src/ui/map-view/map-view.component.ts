@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Input,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -13,9 +14,16 @@ import { GoogleMapsModule } from '@angular/google-maps';
   imports: [CommonModule, GoogleMapsModule],
   templateUrl: './map-view.component.html',
   styleUrl: './map-view.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapViewComponent implements OnInit {
+
+  @Input() mapOriginAndDestination: any = {
+    originLat: 13.0702,
+    originLng: 80.217,
+    destinationLat: 13.0273,
+    destinationLng: 80.2285,
+  };
+
   center: google.maps.LatLngLiteral = { lat: 13.05, lng: 80.2225 };
   vehiclePosition: google.maps.LatLngLiteral = { lat: 13.0702, lng: 80.217 };
   routePath: google.maps.LatLngLiteral[] = [];
@@ -30,14 +38,22 @@ export class MapViewComponent implements OnInit {
     rotation: 0, // ignored unless using advanced overlays
   };
 
+  vehicleMarkerOptions: google.maps.MarkerOptions = {
+    icon: {
+      url: 'assets/truck-icon.png', // path to your custom icon
+      scaledSize: new google.maps.Size(40, 40),
+      anchor: new google.maps.Point(20, 20) // center the icon
+    }
+  };
+
   ngOnInit() {
     this.zoom = 13;
     const directionsService = new google.maps.DirectionsService();
 
     directionsService.route(
       {
-        origin: { lat: 13.0702, lng: 80.217 },
-        destination: { lat: 13.0273, lng: 80.2285 },
+        origin: { lat: this.mapOriginAndDestination.originLat, lng: this.mapOriginAndDestination.originLat },
+        destination: { lat: this.mapOriginAndDestination.destinationLat, lng: this.mapOriginAndDestination.destinationLng },
         travelMode: google.maps.TravelMode.DRIVING,
       },
       (result, status) => {

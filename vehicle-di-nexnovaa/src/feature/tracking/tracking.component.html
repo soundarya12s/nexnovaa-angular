@@ -23,7 +23,7 @@
                         <td>{{ shipment.delivery }}</td>
                         <td><i class="bi bi-geo-alt me-1 text-muted"></i>{{ shipment.location }} </td>
                         <td class="text-end pe-4"> <button class="btn btn-sm btn-light me-2" title="Track"> <i
-                                    class="bi bi-geo-alt-fill" (click)="openLocation(shipment.location)"></i> </button> <button class="btn btn-sm btn-light"
+                                    class="bi bi-geo-alt-fill" (click)="openLocation(shipment.location, shipment.mapOriginAndDestination)"></i> </button> <button class="btn btn-sm btn-light"
                                 title="Details"> <i class="bi bi-info-circle"></i> </button> </td>
                     </tr>
                 </tbody>

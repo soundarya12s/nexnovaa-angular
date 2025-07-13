@@ -1,0 +1,39 @@
+.percentage-container{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 1rem;
+    width: 10rem;
+    background-color: var(--bs-light-grey);
+    border-radius: 0.5rem;
+}
+
+.good-percentage {
+    background-color: var(--bs-green);
+    height: 100%;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bs-white);
+}
+
+.okayish-percentage {
+    background-color: var(--bs-amber);
+    height: 100%;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bs-white);
+}
+
+.bad-percentage {
+    background-color: var(--bs-red);
+    height: 100%;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bs-white);
+}   

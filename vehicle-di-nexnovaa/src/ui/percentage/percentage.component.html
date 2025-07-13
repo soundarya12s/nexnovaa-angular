@@ -1,0 +1,8 @@
+<div class="percentage-container">
+    <div class="percentage" [ngClass]="{
+       'good-percentage': percentage > 75,
+       'okayish-percentage': percentage > 50 && percentage <= 75,
+       'bad-percentage': percentage <= 50
+     }" [style.width.%]="percentage">
+    </div>
+</div>
