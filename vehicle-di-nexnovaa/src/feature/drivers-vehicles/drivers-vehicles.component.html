@@ -1,36 +1,190 @@
-<div>
-    <h3>Drivers & Vehicles</h3>
-    <div class="d-flex mb-3">
-        <button class="btn btn-outline-primary me-2">Add Driver</button>
-        <button class="btn btn-primary">Assign Driver</button>
+<div class="row">
+    <div class="col-md-8 mt-3">
+        <h5>Drivers and Vehicles</h5>
+        <p>Manage drivers and fleet vehicles</p>
     </div>
-
-    <table class="table table-bordered bg-white">
-        <thead class="table-light">
-            <tr>
-                <th>Driver</th>
-                <th>Contact</th>
-                <th>License</th>
-                <th>Status</th>
-                <th>Location</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let driver of drivers">
-                <td>{{driver.name}}</td>
-                <td>{{driver.email}}<br>{{driver.phone}}</td>
-                <td>{{driver.license}}<br>Expires: {{driver.expiry}}</td>
-                <td>
-                    <span class="badge" [ngClass]="{
-            'bg-success': driver.status === 'Active',
-            'bg-warning': driver.status === 'On Leave',
-            'bg-danger': driver.status === 'Inactive'
-          }">{{driver.status}}</span>
-                </td>
-                <td>{{driver.location}}</td>
-                <td><button class="btn btn-sm btn-outline-secondary">View</button></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="col-md-2 mt-3 pe-0">
+        <button class="btn btn-secondary w-100">Add Driver</button>
+    </div>
+    <div class="col-md-2 mt-3">
+        <button class="btn btn-primary w-100">Assign Driver</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <ul class="fluent-tabs-nav">
+            <li class="fluent-tab d-flex align-items-center font-size-20 {{activeTab() === 0 ? 'active' : 'text-black fw-medium'}}"
+                (click)="selectTab(0)">Drivers</li>
+            <li class="fluent-tab d-flex align-items-center font-size-20 {{activeTab() === 1 ? 'active' : 'text-black fw-medium'}}"
+                (click)="selectTab(1)">Vehicles</li>
+        </ul>
+        <hr class="m-0">
+    </div>
+    <div class="col-md-12">
+        @if(activeTab() === 0) {
+        <div class="row">
+            <div class="col-md-4 mt-3">
+                <div class="card p-3">
+                    <div class="row my-2">
+                        <div class="col-4 align-items-center d-flex justify-content-center">
+                            <span class="border-round p-2 bg-green">
+                                <h2 class="bi bi-check2-circle text-success m-0"></h2>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <h5>Active Drivers</h5>
+                            <h3>120</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-3">
+                <div class="card p-3">
+                    <div class="row my-2">
+                        <div class="col-4 align-items-center d-flex justify-content-center">
+                            <span class=" border-round p-2 bg-orange">
+                                <h2 class="bi bi-exclamation-triangle text-warning m-0"></h2>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <h5>License Expiring</h5>
+                            <h3>3</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-3">
+                <div class="card p-3">
+                    <div class="row my-2">
+                        <div class="col-4 align-items-center d-flex justify-content-center">
+                            <span class=" border-round p-2 active-nav">
+                                <h2 class="bi bi-truck text-primary m-0"></h2>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <h5>Active Drivers</h5>
+                            <h3>120</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mt-3">
+                <div class="card min-w-1330">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>DRIVER</th>
+                                <th>CONTACT</th>
+                                <th>LICENSE</th>
+                                <th>STATUS</th>
+                                <th>LOCATION</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for(driver of drivers; track $index) {
+                            <tr>
+                                <td> <i class="bi bi-person-badge text-secondary"></i> {{driver.name}}</td>
+                                <td> <i class="bi bi-envelope text-secondary"></i> {{driver.email}} <br> <i
+                                        class="bi bi-telephone text-secondary"></i> {{driver.phone}}</td>
+                                <td>{{driver.license}}<br> <i class="bi bi-calendar text-secondary"></i>
+                                    {{driver.expiry}}</td>
+                                <td><span class="badge rounded-pill text-bg-primary">{{driver.status}}</span></td>
+                                <td> <i class="bi bi-geo-alt text-secondary"></i> {{driver.location}}</td>
+                                <td>
+                                    <button class="btn btn-light btn-sm me-2">View</button>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        }@else if(activeTab() === 1) {
+        <div class="row">
+            <div class="col-md-4 mt-3">
+                <div class="card p-3">
+                    <div class="row my-2">
+                        <div class="col-4 align-items-center d-flex justify-content-center">
+                            <span class="border-round p-2 bg-green">
+                                <h2 class="bi bi-check2-circle text-success m-0"></h2>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <h5>Total Vehicles</h5>
+                            <h3>120</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-3">
+                <div class="card p-3">
+                    <div class="row my-2">
+                        <div class="col-4 align-items-center d-flex justify-content-center">
+                            <span class=" border-round p-2 bg-orange">
+                                <h2 class="bi bi-exclamation-triangle text-warning m-0"></h2>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <h5>Active Vehicles</h5>
+                            <h3>3</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-3">
+                <div class="card p-3">
+                    <div class="row my-2">
+                        <div class="col-4 align-items-center d-flex justify-content-center">
+                            <span class=" border-round p-2 active-nav">
+                                <h2 class="bi bi-truck text-primary m-0"></h2>
+                            </span>
+                        </div>
+                        <div class="col-8">
+                            <h5>Maintenance Required</h5>
+                            <h3>1</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mt-3">
+                <div class="card min-w-1330">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>NAME</th>
+                                <th>TYPE</th>
+                                <th>REGISTRATION</th>
+                                <th>STATUS</th>
+                                <th>FUEL LEVEL</th>
+                                <th>LAST SERVICE</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for(vehicle of vehicles; track $index) {
+                            <tr>
+                                <td>{{vehicle.name}}</td>
+                                <td>{{vehicle.type}}</td>
+                                <td>{{vehicle.registration}}</td>
+                                <td><span class="badge rounded-pill text-bg-primary">{{vehicle.status}}</span></td>
+                                <td>{{vehicle.fuelLevel}}</td>
+                                <td>{{vehicle.lastService}}</td>
+                                <td>
+                                    <button class="btn btn-light btn-sm me-2">View</button>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
 </div>
