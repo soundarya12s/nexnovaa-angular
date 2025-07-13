@@ -23,11 +23,33 @@
                         <td>{{ shipment.delivery }}</td>
                         <td><i class="bi bi-geo-alt me-1 text-muted"></i>{{ shipment.location }} </td>
                         <td class="text-end pe-4"> <button class="btn btn-sm btn-light me-2" title="Track"> <i
-                                    class="bi bi-geo-alt-fill" (click)="openLocation(shipment.location, shipment.mapOriginAndDestination)"></i> </button> <button class="btn btn-sm btn-light"
-                                title="Details"> <i class="bi bi-info-circle"></i> </button> </td>
+                                    class="bi bi-geo-alt-fill" data-bs-toggle="modal" data-bs-target="#openMap"
+                                    (click)="openLocation(shipment)"></i>
+                            </button> <button class="btn btn-sm btn-light" title="Details"> <i
+                                    class="bi bi-info-circle"></i> </button> </td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="openMap" tabindex="-1" aria-labelledby="openMap" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                    <h5 class="modal-title" id="openMap">Track Vehicle {{currentVehicle?.id}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        @if(currentVehicle?.mapOriginAndDestination){
+                        <app-map-view [mapOriginAndDestination]="currentVehicle.mapOriginAndDestination"></app-map-view>
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

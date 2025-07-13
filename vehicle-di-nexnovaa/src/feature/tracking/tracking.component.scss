@@ -29,3 +29,7 @@
   background-color: #f8d7da;
   color: #c0342d;
 }
+
+::ng-deep .modal-dialog {
+  --bs-modal-width: 90vw !important;
+}

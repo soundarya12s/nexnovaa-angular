@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -16,117 +17,151 @@ import { GoogleMapsModule } from '@angular/google-maps';
   styleUrl: './map-view.component.scss',
 })
 export class MapViewComponent implements OnInit {
+  @Input() mapOriginAndDestination: {
+    originLat: number;
+    originLng: number;
+    destinationLat: number;
+    destinationLng: number;
+  } = {
+      originLat: 41.8781,  // Chicago
+      originLng: -87.6298,
+      destinationLat: 41.4993,  // Cleveland
+      destinationLng: -81.6944
+    };
 
-  @Input() mapOriginAndDestination: any = {
-    originLat: 13.0702,
-    originLng: 80.217,
-    destinationLat: 13.0273,
-    destinationLng: 80.2285,
-  };
-
-  center: google.maps.LatLngLiteral = { lat: 13.05, lng: 80.2225 };
-  vehiclePosition: google.maps.LatLngLiteral = { lat: 13.0702, lng: 80.217 };
+  center!: google.maps.LatLngLiteral;
+  vehiclePosition!: google.maps.LatLngLiteral;
   routePath: google.maps.LatLngLiteral[] = [];
   index = 0;
-  zoom: any;
+  zoom = 13;
   private intervalId: any;
   zoomInterval: any;
-  vehicleIcon = {
-    url: 'src/app/assets/vehicle.png',
-    scaledSize: new google.maps.Size(40, 40),
-    anchor: new google.maps.Point(20, 20), // optional: centers the icon
-    rotation: 0, // ignored unless using advanced overlays
-  };
 
   vehicleMarkerOptions: google.maps.MarkerOptions = {
     icon: {
-      url: 'assets/truck-icon.png', // path to your custom icon
+      url: 'assets/truck-icon.png',
       scaledSize: new google.maps.Size(40, 40),
-      anchor: new google.maps.Point(20, 20) // center the icon
+      anchor: new google.maps.Point(20, 20)
     }
   };
 
   ngOnInit() {
-    this.zoom = 13;
-    const directionsService = new google.maps.DirectionsService();
-
-    directionsService.route(
-      {
-        origin: { lat: this.mapOriginAndDestination.originLat, lng: this.mapOriginAndDestination.originLat },
-        destination: { lat: this.mapOriginAndDestination.destinationLat, lng: this.mapOriginAndDestination.destinationLng },
-        travelMode: google.maps.TravelMode.DRIVING,
-      },
-      (result, status) => {
-        if (
-          status === google.maps.DirectionsStatus.OK &&
-          result?.routes?.length
-        ) {
-          const route = result.routes[0].overview_path;
-          this.routePath = route.map((point) => ({
-            lat: point.lat(),
-            lng: point.lng(),
-          }));
-
-          console.log('Route Path:', this.routePath); // This will show the route
-
-          this.index = 0;
-          this.intervalId = setInterval(() => {
-            if (this.index < this.routePath.length - 1) {
-              this.updateVehiclePosition();
-            } else {
-              clearInterval(this.intervalId);
-            }
-          }, 1000); // adjust for speed
-        } else {
-          console.error('Directions request failed due to', status);
-        }
-      }
-    );
+    this.mapIterations();
   }
 
-  vehicleRotation = 0;
+  // ngOnChanges() {
+  //   if (this.mapOriginAndDestination) {
+  //     console.log('runnning onchanges coords');
+  //     this.mapIterations();
+  //   }
+  // }
+  mapIterations() {
+    // clearInterval(this.intervalId);
+    // clearInterval(this.zoomInterval);
+    try {
+      setTimeout(() => {
+        console.log('Executing map component');
+
+        const origin = {
+          lat: this.mapOriginAndDestination.originLat,
+          lng: this.mapOriginAndDestination.originLng,
+        };
+
+        const destination = {
+          lat: this.mapOriginAndDestination.destinationLat,
+          lng: this.mapOriginAndDestination.destinationLng,
+        };
+
+        // Center and start vehicle at origin
+        this.center = origin;
+        this.vehiclePosition = origin;
+
+        const directionsService = new google.maps.DirectionsService();
+
+        directionsService.route(
+          {
+            origin,
+            destination,
+            travelMode: google.maps.TravelMode.DRIVING,
+          },
+          (result, status) => {
+            if (
+              status === google.maps.DirectionsStatus.OK &&
+              result?.routes?.length
+            ) {
+              const route = result.routes[0].overview_path;
+              this.routePath = route.map((point) => ({
+                lat: point.lat(),
+                lng: point.lng(),
+              }));
+
+              this.index = 0;
+              this.intervalId = setInterval(() => {
+                if (this.index < this.routePath.length - 1) {
+                  this.updateVehiclePosition();
+                } else {
+                  clearInterval(this.intervalId);
+                }
+              }, 1000);
+            } else {
+              console.error('Directions request failed:', status);
+            }
+          }
+        );
+      }, 200);
+    } catch (e) {
+      console.warn(e);
+    }
+  }
+
+  // ngOnDestroy() {
+  //   clearInterval(this.intervalId);
+  //   clearInterval(this.zoomInterval);
+  // }
 
   updateVehiclePosition() {
     const current = this.routePath[this.index];
     const next = this.routePath[this.index + 1];
     if (next) {
       const angle = this.calculateBearing(current, next);
-      this.vehicleIcon = {
-        ...this.vehicleIcon,
-        rotation: angle,
+      const baseIcon = this.vehicleMarkerOptions.icon || {};
+      this.vehicleMarkerOptions = {
+        ...this.vehicleMarkerOptions,
+        icon: {
+          url: 'assets/truck-icon.png',
+          scaledSize: new google.maps.Size(40, 40),
+          anchor: new google.maps.Point(20, 20),
+          rotation: angle
+        } as google.maps.Icon
       };
     }
+
     this.vehiclePosition = current;
+    this.index++;
 
     console.log('Vehicle Position:', this.vehiclePosition); // Log to track position
-    this.index++;
   }
 
   zoomToMarker() {
     this.zoomInterval = setInterval(() => {
-      this.center = {
-        lat: this.vehiclePosition.lat,
-        lng: this.vehiclePosition.lng,
-      };
+      this.center = this.vehiclePosition;
       this.zoom = 18;
     }, 300);
+    console.log('Zooming to marker:', this.vehiclePosition); // Log to track zoom
+
   }
 
   destroyZoom() {
     clearInterval(this.zoomInterval);
   }
 
-  calculateBearing(
-    start: google.maps.LatLngLiteral,
-    end: google.maps.LatLngLiteral
-  ): number {
+  calculateBearing(start: google.maps.LatLngLiteral, end: google.maps.LatLngLiteral): number {
     const lat1 = (start.lat * Math.PI) / 180;
     const lat2 = (end.lat * Math.PI) / 180;
     const lngDiff = ((end.lng - start.lng) * Math.PI) / 180;
 
     const y = Math.sin(lngDiff) * Math.cos(lat2);
-    const x =
-      Math.cos(lat1) * Math.sin(lat2) -
+    const x = Math.cos(lat1) * Math.sin(lat2) -
       Math.sin(lat1) * Math.cos(lat2) * Math.cos(lngDiff);
     const angle = Math.atan2(y, x);
     return ((angle * 180) / Math.PI + 360) % 360;

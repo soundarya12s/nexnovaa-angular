@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { MapViewComponent } from "../../ui/map-view/map-view.component";
 
 @Component({
   selector: 'app-tracking',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MapViewComponent],
   templateUrl: './tracking.component.html',
   styleUrl: './tracking.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -55,6 +56,8 @@ export class TrackingComponent {
   //     location: 'New Haven, CT',
   //   },
   // ];
+
+  currentVehicle: any = null;
 
   shipments = [
     {
@@ -128,14 +131,8 @@ export class TrackingComponent {
       }
     }
   ];
-
-
-  openLocation(locationId: string, mapData: any) {
-    console.log('Opening location:', locationId);
-    this.router.navigate(['/maps'], {
-      state: {
-        mapData
-      }
-    });
+  openLocation(currentVehicle: any) {
+    this.currentVehicle = currentVehicle;
+    console.log('current vehicle', currentVehicle);
   }
 }
