@@ -51,7 +51,7 @@ export class MapViewComponent implements OnInit {
 
   // ngOnChanges() {
   //   if (this.mapOriginAndDestination) {
-  //     console.log('runnning onchanges coords');
+  //     console.log('runnning onchanges coords', this.mapOriginAndDestination);
   //     this.mapIterations();
   //   }
   // }
@@ -59,56 +59,56 @@ export class MapViewComponent implements OnInit {
     // clearInterval(this.intervalId);
     // clearInterval(this.zoomInterval);
     try {
-      setTimeout(() => {
-        console.log('Executing map component');
+      // setTimeout(() => {
+      console.log('Executing map component', this.mapOriginAndDestination);
 
-        const origin = {
-          lat: this.mapOriginAndDestination.originLat,
-          lng: this.mapOriginAndDestination.originLng,
-        };
+      const origin = {
+        lat: this.mapOriginAndDestination.originLat,
+        lng: this.mapOriginAndDestination.originLng,
+      };
 
-        const destination = {
-          lat: this.mapOriginAndDestination.destinationLat,
-          lng: this.mapOriginAndDestination.destinationLng,
-        };
+      const destination = {
+        lat: this.mapOriginAndDestination.destinationLat,
+        lng: this.mapOriginAndDestination.destinationLng,
+      };
 
-        // Center and start vehicle at origin
-        this.center = origin;
-        this.vehiclePosition = origin;
+      // Center and start vehicle at origin
+      this.center = origin;
+      this.vehiclePosition = origin;
 
-        const directionsService = new google.maps.DirectionsService();
+      const directionsService = new google.maps.DirectionsService();
 
-        directionsService.route(
-          {
-            origin,
-            destination,
-            travelMode: google.maps.TravelMode.DRIVING,
-          },
-          (result, status) => {
-            if (
-              status === google.maps.DirectionsStatus.OK &&
-              result?.routes?.length
-            ) {
-              const route = result.routes[0].overview_path;
-              this.routePath = route.map((point) => ({
-                lat: point.lat(),
-                lng: point.lng(),
-              }));
+      directionsService.route(
+        {
+          origin,
+          destination,
+          travelMode: google.maps.TravelMode.DRIVING,
+        },
+        (result, status) => {
+          if (
+            status === google.maps.DirectionsStatus.OK &&
+            result?.routes?.length
+          ) {
+            const route = result.routes[0].overview_path;
+            this.routePath = route.map((point) => ({
+              lat: point.lat(),
+              lng: point.lng(),
+            }));
 
-              this.index = 0;
-              this.intervalId = setInterval(() => {
-                if (this.index < this.routePath.length - 1) {
-                  this.updateVehiclePosition();
-                } else {
-                  clearInterval(this.intervalId);
-                }
-              }, 1000);
-            } else {
-              console.error('Directions request failed:', status);
-            }
+            this.index = 0;
+            this.intervalId = setInterval(() => {
+              if (this.index < this.routePath.length - 1) {
+                this.updateVehiclePosition();
+              } else {
+                clearInterval(this.intervalId);
+              }
+            }, 1000);
+          } else {
+            console.error('Directions request failed:', status);
           }
-        );
-      }, 200);
+        }
+      );
+      // }, 200);
     } catch (e) {
       console.warn(e);
     }
@@ -136,15 +136,15 @@ export class MapViewComponent implements OnInit {
       };
     }
 
-    this.vehiclePosition = current;
+    this.vehiclePosition = {...current};
     this.index++;
 
-    console.log('Vehicle Position:', this.vehiclePosition); // Log to track position
+    console.log('Vehicle Position:', this.vehiclePosition, this.center); // Log to track position
   }
 
   zoomToMarker() {
     this.zoomInterval = setInterval(() => {
-      this.center = this.vehiclePosition;
+      this.center = {...this.vehiclePosition};
       this.zoom = 18;
     }, 300);
     console.log('Zooming to marker:', this.vehiclePosition); // Log to track zoom
@@ -153,6 +153,7 @@ export class MapViewComponent implements OnInit {
 
   destroyZoom() {
     clearInterval(this.zoomInterval);
+    this.zoom = 13;
   }
 
   calculateBearing(start: google.maps.LatLngLiteral, end: google.maps.LatLngLiteral): number {

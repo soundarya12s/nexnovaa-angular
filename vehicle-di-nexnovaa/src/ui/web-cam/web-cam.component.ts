@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WebcamImage, WebcamModule } from 'ngx-webcam';
 import { Subject } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-web-cam',
@@ -14,6 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class WebCamComponent {
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private sessionId = this.route.snapshot.paramMap.get('sessionId')!;
   private trigger = new Subject<void>();
   public webcamImage: WebcamImage | null = null;
@@ -33,5 +34,7 @@ export class WebCamComponent {
     };
 
     console.log('image:', payload);
+
+    this.router.navigate(['/drivers-and-vehicles']);
   }
 }

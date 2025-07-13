@@ -16,6 +16,6 @@ export class VehicleActionsComponent {
   opencamera() {
     console.log('Opening camera for vehicle documentation');
     // Logic to open camera goes here
-    this.router.navigate(['/scan-qr']);
+    this.router.navigate(['/web-cam']);
   }
 }

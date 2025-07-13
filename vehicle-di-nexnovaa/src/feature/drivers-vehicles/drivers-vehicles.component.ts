@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class DriversVehiclesComponent {
   private readonly route = inject(Router);
-  public activeTab = signal(0);
+  public activeTab = signal(1);
 
   selectTab(index: number) {
     try {
@@ -36,6 +36,7 @@ export class DriversVehiclesComponent {
   vehicles = [
     { name: 'Truck 1', type: 'Truck', registration: 'TRK-1234', status: 'Active', fuelLevel: 75, lastService: '2023-10-01' },
     { name: 'Van 2', type: 'Van', registration: 'VAN-5678', status: 'Maintenance Required', fuelLevel: 50, lastService: '2023-09-15' },
-    { name: 'Car 3', type: 'Car', registration: 'CAR-9012', status: 'Active', fuelLevel: 80, lastService: '2023-10-05' }
+    { name: 'Car 3', type: 'Car', registration: 'CAR-9012', status: 'Active', fuelLevel: 80, lastService: '2023-10-05' },
+    { name: 'Vehicle #1213', type: 'Car', registration: 'TN 03 MF 4477', status: 'Active', fuelLevel: 80, lastService: '2024-10-12' }
   ]
 }

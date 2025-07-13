@@ -27,7 +27,7 @@ export const routes: Routes = [
   },
   {
     path: 'web-cam',
-    component: WebcamComponent,
+    component: WebCamComponent,
   },
   {
     path: 'maps',
