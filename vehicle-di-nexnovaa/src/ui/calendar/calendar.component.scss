@@ -1,1 +1,23 @@
-
+.date-range-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+.nav-btn {
+  background: transparent;
+  border: 1px solid #555;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.date-range {
+  margin: 0 10px;
+  font-weight: 500;
+  font-size: 14px;
+}

@@ -1,1 +1,35 @@
+.shipment-container {
+  background-color: #f8f9fb;
+  padding: 24px;
+  border-radius: 12px;
+}
 
+.status-badge {
+  font-size: 0.75rem;
+  padding: 0.35rem 0.65rem;
+  font-weight: 500;
+}
+
+.status-badge.in-transit {
+  background-color: #e0e8ff;
+  color: #2b56db;
+}
+
+.status-badge.delivered {
+  background-color: #d6f5dd;
+  color: #159c5b;
+}
+
+.status-badge.pending {
+  background-color: #fff3cd;
+  color: #b68700;
+}
+
+.status-badge.delayed {
+  background-color: #f8d7da;
+  color: #c0342d;
+}
+
+::ng-deep .modal-dialog {
+  --bs-modal-width: 90vw !important;
+}

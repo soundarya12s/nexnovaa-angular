@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,4 +9,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './calendar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarComponent {}
+export class CalendarComponent {
+}
